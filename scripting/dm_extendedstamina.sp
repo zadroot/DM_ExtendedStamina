@@ -1,20 +1,14 @@
 #include <sourcemod>
 
-#define PLUGIN_NAME			"DM ExtendedStamina"
-#define PLUGIN_AUTHOR		"Root"
-#define PLUGIN_DESCRIPTION	"Allows player to spring longer than normal in DeathMatch"
-#define PLUGIN_VERSION		"1.0"
-#define PLUGIN_CONTACT		"http://www.dodsplugins.com/"
-
 #define DOD_MAXPLAYERS		33
 
 public Plugin:myinfo =
 {
-	name			= PLUGIN_NAME,
-	author			= PLUGIN_AUTHOR,
-	description		= PLUGIN_DESCRIPTION,
-	version			= PLUGIN_VERSION,
-	url				= PLUGIN_CONTACT
+	name			= "DM ExtendedStamina",
+	author			= "Root",
+	description		= "Allows player to spring longer than normal in DeathMatch",
+	version			= "1.0",
+	url				= "http://www.dodsplugins.com/"
 }
 
 new	Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS] = INVALID_HANDLE
@@ -22,7 +16,7 @@ new	Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS]
 
 public OnPluginStart()
 {
-	ExtendedStamina = CreateConVar("dm_extendedstamina", "5", "<#> = how many stamina regenerate per second while sprinting", FCVAR_PLUGIN, true, 1.0, true, 15.0)
+	ExtendedStamina = CreateConVar("dm_extendedstamina", "5", "<#> = how many stamina regenerate per second while sprinting", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 1.0, true, 15.0)
 
 	HookEventEx("player_spawn", OnPlayerSpawn)
 
