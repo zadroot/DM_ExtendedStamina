@@ -1,24 +1,24 @@
 #include <sourcemod>
 
-#define DOD_MAXPLAYERS		33
+#define DOD_MAXPLAYERS 33
+
+new	Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS] = INVALID_HANDLE
 
 public Plugin:myinfo =
 {
 	name			= "DM ExtendedStamina",
 	author			= "Root",
-	description		= "Allows player to spring longer than normal in DeathMatch",
+	description		= "Allows player to sprint longer than normal in DeathMatch",
 	version			= "1.0",
 	url				= "http://www.dodsplugins.com/"
 }
 
-new	Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS] = INVALID_HANDLE
-
 
 public OnPluginStart()
 {
-	ExtendedStamina = CreateConVar("dm_extendedstamina", "5", "<#> = how many stamina regenerate per second while sprinting", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 1.0, true, 15.0)
+	ExtendedStamina = CreateConVar("dm_extendedstamina", "5.0", "<#> = How many stamina regenerate per second while sprinting?", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 1.0, true, 15.0)
 
-	HookEventEx("player_spawn", OnPlayerSpawn)
+	HookEvent("player_spawn", OnPlayerSpawn)
 
 	AutoExecConfig(true, "dm.extendedstamina")
 }
