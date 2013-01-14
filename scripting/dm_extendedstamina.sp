@@ -3,11 +3,11 @@
 #define DOD_MAXPLAYERS 33
 #define Team_Spectator 1
 
-new Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS] = INVALID_HANDLE
+new Handle:ExtendedStamina = INVALID_HANDLE, Handle:StaminaTimer[DOD_MAXPLAYERS + 1] = INVALID_HANDLE
 
 public Plugin:myinfo =
 {
-	name        = "DM ExtendedStamina",
+	name        = "DM Extended Stamina",
 	author      = "Root",
 	description = "Allows player to sprint longer than normal in DeathMatch",
 	version     = "1.0",
@@ -60,5 +60,5 @@ KillStaminaTimer(client)
 
 bool:IsPlayerValid(client)
 {
-	return (client > 0 && IsClientInGame(client) && IsPlayerAlive(client) && GetClientTeam(client) > Team_Spectator) ? true : false
+	return (client > 0 && IsClientInGame(client) && IsPlayerAlive(client) && GetClientTeam(client) > Team_Spectator) ? true : false;
 }
