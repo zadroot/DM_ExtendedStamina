@@ -17,7 +17,7 @@ public OnPluginStart()
 {
 	ExtendedStamina = CreateConVar("dm_extendedstamina", "5.0", "<#> = Determines an amount of stamina regenerate per second while player is sprinting", FCVAR_PLUGIN|FCVAR_NOTIFY, true, 1.0, true, 15.0)
 
-	HookEvent("player_spawn", OnPlayerSpawn)
+	HookEvent("player_activate", OnPlayerSpawn)
 
 	AutoExecConfig(true, "dm.extendedstamina")
 }
@@ -32,7 +32,6 @@ public Action:OnPlayerSpawn(Handle:event, const String:name[], bool:dontBroadcas
 	new clientID = GetEventInt(event, "userid");
 	new client   = GetClientOfUserId(clientID);
 
-	KillStaminaTimer(client)
 	if (IsPlayerValid(client))
 	{
 		StaminaTimer[client] = CreateTimer(1.0, StaminaRegen, clientID, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE)
@@ -61,4 +60,4 @@ KillStaminaTimer(client)
 	StaminaTimer[client] = INVALID_HANDLE
 }
 
-bool:IsPlayerValid(client) return (1 <= client <= MaxClients && IsClientInGame(client) && IsPlayerAlive(client) && GetClientTeam(client) > Team_Spectator) ? true : false;
+bool:IsPlayerValid(client) return (1 <= client <= MaxClients && IsClientInGame(client)) ? true : false;
